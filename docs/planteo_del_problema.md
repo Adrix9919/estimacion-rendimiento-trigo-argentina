@@ -49,4 +49,10 @@ Se utiliza el conjunto de datos oficial *Trigo: siembra, cosecha, producción y 
 - **Variables excluidas:** la producción y la superficie cosechada no se utilizan como predictoras, ya que permiten calcular directamente el rendimiento y generarían fuga de información (data leakage).
 - **Período de estudio:** campañas 2000 a 2025.
 
-La descripción completa del dataset, sus variables y los criterios del período se encuentran en
+La descripción completa del dataset, sus variables y los criterios del período se encuentran en `descripcion_dataset.md`.
+
+## Precisiones sobre el planteo
+
+- **Unidad de análisis:** cada fila representa un departamento en una campaña agrícola. Las predicciones corresponden al rendimiento medio de un departamento, no al de un establecimiento particular.
+- **Momento de la predicción:** el rendimiento se estima al finalizar la siembra de cada campaña, antes de la cosecha, cuando ya se conocen la ubicación, la campaña y la superficie sembrada.
+- **Relación con el objetivo:** la ubicación resume condiciones propias de cada zona, el año captura la tendencia tecnológica y el rendimiento de campañas anteriores aporta el nivel de productividad de cada departamento. Los detalles están en `descripcion_dataset.md`.
