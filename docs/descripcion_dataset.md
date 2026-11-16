@@ -101,7 +101,18 @@ Se encontraron los siguientes puntos a tratar antes de entrenar:
 - **Registros repetidos:** 89 filas repiten la combinación de campaña y departamento. Se deben revisar para decidir si se eliminan o si corresponden a casos distintos.
 - **Rendimientos inconsistentes:** en 39 filas, el rendimiento informado difiere en más de un 5 % del que resulta de dividir la producción por la superficie cosechada. Por ejemplo, Iriondo (Santa Fe, campaña 1927/1928) figura con 11.000 kg/ha cuando el cálculo da 1.100, y General Alvear (Buenos Aires, campaña 1929/1930) con 8.700 cuando el cálculo da 800. Probablemente sean errores de carga.
 
-El período de estudio se definirá en el análisis exploratorio, según la cantidad y la calidad de los registros disponibles.
+## Período de estudio
+
+Se trabajará con las campañas de 2000 a 2025 (6.053 filas). El resto del archivo se conserva en `data/raw/` pero no se usa en el modelo.
+
+Criterios de elección:
+
+- **Calidad del objetivo:** desde 1990 ninguna campaña tiene rendimiento faltante, mientras que en las décadas de 1930 y 1940 hay campañas con decenas de faltantes.
+- **Cobertura estable:** entre 2000 y 2025 cada campaña tiene entre 196 y 265 departamentos, con un solo registro por departamento.
+- **Menor confiabilidad de los datos antiguos:** las primeras campañas tienen rendimientos redondeados y menor cobertura, y reflejan una tecnología de cultivo muy distinta a la actual.
+- **Tamaño suficiente:** el período aporta unas 6.000 filas sin arrastrar décadas de datos poco comparables.
+
+División de los datos: se entrena con las campañas 2000 a 2019 y se evalúa con 2020 a 2025 (4.510 filas para entrenar y 1.543 para evaluar), respetando el orden temporal para simular una predicción hacia adelante. La campaña 2000 no tiene campaña anterior en el período, por lo que no cuenta con las variables derivadas de campañas previas.
 
 ## Próximos pasos
 
