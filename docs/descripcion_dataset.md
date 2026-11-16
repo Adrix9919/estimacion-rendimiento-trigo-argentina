@@ -75,7 +75,7 @@ El modelo estima el rendimiento al finalizar la siembra de cada campaña, antes 
 - `provincia` y `departamento`
 - `anio`
 - `superficie_sembrada_ha`
-- Variables derivadas del propio dataset: rendimiento de la campaña anterior y promedio de las últimas campañas del mismo departamento (solo campañas previas a la que se predice).
+- Variables derivadas del propio dataset: rendimiento de la campaña anterior y promedio de las tres campañas anteriores del mismo departamento (o de las que existan), usando solo campañas previas a la que se predice.
 
 ### Variables excluidas
 
@@ -112,15 +112,16 @@ Criterios de elección:
 - **Menor confiabilidad de los datos antiguos:** las primeras campañas tienen rendimientos redondeados y menor cobertura, y reflejan una tecnología de cultivo muy distinta a la actual.
 - **Tamaño suficiente:** el período aporta unas 6.000 filas sin arrastrar décadas de datos poco comparables.
 
-División de los datos: se entrena con las campañas 2000 a 2019 y se evalúa con 2020 a 2025 (4.510 filas para entrenar y 1.543 para evaluar), respetando el orden temporal para simular una predicción hacia adelante. La campaña 2000 no tiene campaña anterior en el período, por lo que no cuenta con las variables derivadas de campañas previas.
+División de los datos: se entrena con las campañas 2000 a 2019 y se evalúa con 2020 a 2025, respetando el orden temporal para simular una predicción hacia adelante. Como las variables derivadas necesitan la campaña anterior del mismo departamento, se descartan 416 de las 6.053 filas que no la tienen (las de 2000 y otras cuyo departamento no tiene registro en la campaña anterior). Quedan 5.637 filas para el modelo: 4.128 para entrenar y 1.509 para evaluar.
 
-## Próximos pasos
+Revisión de los datos dentro del período:
 
-1. Definir el período de estudio según la cantidad y la calidad de los registros.
-2. Limpiar los datos (faltantes, repetidos e inconsistentes) y construir las variables derivadas.
-3. Dividir los datos respetando el orden temporal: entrenar con campañas anteriores y evaluar con las más recientes.
-4. Entrenar una regresión lineal y un árbol de decisión, y compararlos con métricas de error (MAE, RMSE y R²).
-5. Interpretar los resultados en relación con la pregunta del proyecto y las limitaciones señaladas.
+- **Provincias:** solo 14 de las 22 provincias del archivo tienen registros entre 2000 y 2025. Buenos Aires concentra 2.523 de las 6.053 filas.
+- **Rendimiento igual a cero:** 44 filas tienen superficie sembrada y producción nula (25 en Santiago del Estero). Se conservan, porque el modelo predice al finalizar la siembra y en ese momento no se sabe si el lote se cosechará.
+- **Calidad:** en este período no hay rendimientos inconsistentes ni registros repetidos.
+
+## Análisis y modelos
+El análisis exploratorio, la preparación de los datos, el entrenamiento de los modelos y sus resultados están en `notebooks/modelo_rendimiento_trigo.ipynb`.
 
 ## Fuente
 Secretaría de Agricultura, Ganadería y Pesca (MAGyP). *Trigo – siembra, cosecha, producción, rendimiento*. Datos Agricultura, Ganadería y Pesca. Licencia CC BY 4.0. https://datos.magyp.gob.ar/dataset/trigo-siembra-cosecha-produccion-rendimiento
