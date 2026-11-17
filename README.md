@@ -40,6 +40,10 @@ Los dos modelos estiman el rendimiento mejor que las dos referencias sencillas, 
 
 Los modelos siguen el nivel general del rendimiento pero no anticipan cambios bruscos entre campañas: sobreestimaron 2022, año de caída fuerte, y subestimaron 2025, el de mayor rendimiento. El dataset no incluye variables climáticas, por lo que no es posible determinar a qué se deben esas variaciones. Las relaciones observadas son asociaciones y no implican causalidad.
 
+## Video explicativo
+
+Video de 7 minutos con la descripción del proyecto y los resultados: https://youtu.be/0IHPJeh7rjQ
+
 ## Documentos y notebooks
 
 - `docs/planteo_del_problema.md`: objetivos, tipo de problema y modelos.
